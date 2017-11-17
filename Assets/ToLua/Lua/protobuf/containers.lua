@@ -24,7 +24,11 @@ module "protobuf.containers"
 
 local _RCFC_meta = {
     add = function(self)
-        local value = self._message_descriptor._concrete_class()
+		--modify
+        --local value = self._message_descriptor._concrete_class()
+		local message_descriptor = self._message_descriptor;
+		local value = (message_descriptor._concrete_class and message_descriptor._concrete_class()) or message_descriptor();
+
         local listener = self._listener
         rawset(self, #self + 1, value)
         value:_SetListener(listener)
@@ -40,7 +44,15 @@ local _RCFC_meta = {
     end,
     __newindex = function(self, key, value)
         error("RepeatedCompositeFieldContainer Can't set value directly")
-    end
+    end,
+	--add by zxp
+	MergeFrom = function(self, l)
+		local len = table.getn(l);
+		for i = 1, len, 1 do
+			local value = self:add();
+			value:MergeFrom(l[i]);
+		end
+	end
 }
 _RCFC_meta.__index = _RCFC_meta
 
@@ -64,7 +76,14 @@ local _RSFC_meta = {
     end,
     __newindex = function(self, key, value)
         error("RepeatedCompositeFieldContainer Can't set value directly")
-    end
+    end,
+	--add by zxp
+	MergeFrom = function(self, l)
+		local len = table.getn(l);
+		for i = 1, len, 1 do
+			self:append(l[i]);
+		end
+	end
 }
 _RSFC_meta.__index = _RSFC_meta
 

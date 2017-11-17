@@ -43,6 +43,7 @@ public static class LuaBinder
 		UnityEngine_KeyCodeWrap.Register(L);
 		UnityEngine_SkinnedMeshRendererWrap.Register(L);
 		UnityEngine_SpaceWrap.Register(L);
+		UnityEngine_MeshFilterWrap.Register(L);
 		UnityEngine_AnimationBlendModeWrap.Register(L);
 		UnityEngine_QueueModeWrap.Register(L);
 		UnityEngine_PlayModeWrap.Register(L);
@@ -86,26 +87,8 @@ public static class LuaBinder
 		L.EndModule();
 		L.EndModule();
 		L.BeginModule("Framework");
-		Framework_AssetBundleManagerWrap.Register(L);
-		Framework_BytesManagerWrap.Register(L);
-		Framework_AssetObjectManagerWrap.Register(L);
-		Framework_SceneManagerWrap.Register(L);
-		Framework_Singleton_Framework_AssetBundleManagerWrap.Register(L);
-		Framework_Singleton_Framework_BytesManagerWrap.Register(L);
-		Framework_Singleton_Framework_AssetObjectManagerWrap.Register(L);
-		Framework_Singleton_Framework_SceneManagerWrap.Register(L);
-		L.BeginModule("AssetBundleManager");
-		L.RegFunction("LoadBundleCallback", Framework_AssetBundleManager_LoadBundleCallback);
-		L.EndModule();
-		L.BeginModule("BytesManager");
-		L.RegFunction("LoadDataCallback", Framework_BytesManager_LoadDataCallback);
-		L.EndModule();
-		L.BeginModule("AssetObjectManager");
-		L.RegFunction("LoadObjectCallback", Framework_AssetObjectManager_LoadObjectCallback);
-		L.EndModule();
-		L.BeginModule("SceneManager");
-		L.RegFunction("LoadSceneCallback", Framework_SceneManager_LoadSceneCallback);
-		L.EndModule();
+		Framework_GameScriptManagerWrap.Register(L);
+		Framework_Singleton_Framework_GameScriptManagerWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("DebugSystem");
 		DebugSystem_GameDebuggerWrap.Register(L);
@@ -346,114 +329,6 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateTraits<BehaviorDesigner.Runtime.Behavior.BehaviorHandler>.Create(func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Framework_AssetBundleManager_LoadBundleCallback(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateTraits<Framework.AssetBundleManager.LoadBundleCallback>.Create(func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<Framework.AssetBundleManager.LoadBundleCallback>.Create(func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Framework_BytesManager_LoadDataCallback(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateTraits<Framework.BytesManager.LoadDataCallback>.Create(func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<Framework.BytesManager.LoadDataCallback>.Create(func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Framework_AssetObjectManager_LoadObjectCallback(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateTraits<Framework.AssetObjectManager.LoadObjectCallback>.Create(func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<Framework.AssetObjectManager.LoadObjectCallback>.Create(func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Framework_SceneManager_LoadSceneCallback(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateTraits<Framework.SceneManager.LoadSceneCallback>.Create(func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<Framework.SceneManager.LoadSceneCallback>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

@@ -30,10 +30,6 @@ public class DelegateFactory
 		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), factory.UnityEngine_AudioClip_PCMReaderCallback);
 		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		dict.Add(typeof(BehaviorDesigner.Runtime.Behavior.BehaviorHandler), factory.BehaviorDesigner_Runtime_Behavior_BehaviorHandler);
-		dict.Add(typeof(Framework.AssetBundleManager.LoadBundleCallback), factory.Framework_AssetBundleManager_LoadBundleCallback);
-		dict.Add(typeof(Framework.BytesManager.LoadDataCallback), factory.Framework_BytesManager_LoadDataCallback);
-		dict.Add(typeof(Framework.AssetObjectManager.LoadObjectCallback), factory.Framework_AssetObjectManager_LoadObjectCallback);
-		dict.Add(typeof(Framework.SceneManager.LoadSceneCallback), factory.Framework_SceneManager_LoadSceneCallback);
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
@@ -48,10 +44,6 @@ public class DelegateFactory
 		DelegateTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.UnityEngine_AudioClip_PCMReaderCallback);
 		DelegateTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.UnityEngine_AudioClip_PCMSetPositionCallback);
 		DelegateTraits<BehaviorDesigner.Runtime.Behavior.BehaviorHandler>.Init(factory.BehaviorDesigner_Runtime_Behavior_BehaviorHandler);
-		DelegateTraits<Framework.AssetBundleManager.LoadBundleCallback>.Init(factory.Framework_AssetBundleManager_LoadBundleCallback);
-		DelegateTraits<Framework.BytesManager.LoadDataCallback>.Init(factory.Framework_BytesManager_LoadDataCallback);
-		DelegateTraits<Framework.AssetObjectManager.LoadObjectCallback>.Init(factory.Framework_AssetObjectManager_LoadObjectCallback);
-		DelegateTraits<Framework.SceneManager.LoadSceneCallback>.Init(factory.Framework_SceneManager_LoadSceneCallback);
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
@@ -66,10 +58,6 @@ public class DelegateFactory
 		TypeTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMReaderCallback);
 		TypeTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMSetPositionCallback);
 		TypeTraits<BehaviorDesigner.Runtime.Behavior.BehaviorHandler>.Init(factory.Check_BehaviorDesigner_Runtime_Behavior_BehaviorHandler);
-		TypeTraits<Framework.AssetBundleManager.LoadBundleCallback>.Init(factory.Check_Framework_AssetBundleManager_LoadBundleCallback);
-		TypeTraits<Framework.BytesManager.LoadDataCallback>.Init(factory.Check_Framework_BytesManager_LoadDataCallback);
-		TypeTraits<Framework.AssetObjectManager.LoadObjectCallback>.Init(factory.Check_Framework_AssetObjectManager_LoadObjectCallback);
-		TypeTraits<Framework.SceneManager.LoadSceneCallback>.Init(factory.Check_Framework_SceneManager_LoadSceneCallback);
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
@@ -84,10 +72,6 @@ public class DelegateFactory
 		StackTraits<UnityEngine.AudioClip.PCMReaderCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMReaderCallback;
 		StackTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMSetPositionCallback;
 		StackTraits<BehaviorDesigner.Runtime.Behavior.BehaviorHandler>.Push = factory.Push_BehaviorDesigner_Runtime_Behavior_BehaviorHandler;
-		StackTraits<Framework.AssetBundleManager.LoadBundleCallback>.Push = factory.Push_Framework_AssetBundleManager_LoadBundleCallback;
-		StackTraits<Framework.BytesManager.LoadDataCallback>.Push = factory.Push_Framework_BytesManager_LoadDataCallback;
-		StackTraits<Framework.AssetObjectManager.LoadObjectCallback>.Push = factory.Push_Framework_AssetObjectManager_LoadObjectCallback;
-		StackTraits<Framework.SceneManager.LoadSceneCallback>.Push = factory.Push_Framework_SceneManager_LoadSceneCallback;
 	}
     
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
@@ -942,242 +926,6 @@ public class DelegateFactory
 	}
 
 	void Push_BehaviorDesigner_Runtime_Behavior_BehaviorHandler(IntPtr L, BehaviorDesigner.Runtime.Behavior.BehaviorHandler o)
-	{
-		ToLua.Push(L, o);
-	}
-
-	class Framework_AssetBundleManager_LoadBundleCallback_Event : LuaDelegate
-	{
-		public Framework_AssetBundleManager_LoadBundleCallback_Event(LuaFunction func) : base(func) { }
-		public Framework_AssetBundleManager_LoadBundleCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(int param0, UnityEngine.AssetBundle param1)
-		{
-			func.BeginPCall();
-			func.Push(param0);
-			func.PushSealed(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(int param0, UnityEngine.AssetBundle param1)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.Push(param0);
-			func.PushSealed(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public Framework.AssetBundleManager.LoadBundleCallback Framework_AssetBundleManager_LoadBundleCallback(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			Framework.AssetBundleManager.LoadBundleCallback fn = delegate(int param0, UnityEngine.AssetBundle param1) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			Framework_AssetBundleManager_LoadBundleCallback_Event target = new Framework_AssetBundleManager_LoadBundleCallback_Event(func);
-			Framework.AssetBundleManager.LoadBundleCallback d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			Framework_AssetBundleManager_LoadBundleCallback_Event target = new Framework_AssetBundleManager_LoadBundleCallback_Event(func, self);
-			Framework.AssetBundleManager.LoadBundleCallback d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	bool Check_Framework_AssetBundleManager_LoadBundleCallback(IntPtr L, int pos)
-	{
-		return TypeChecker.CheckDelegateType(typeof(Framework.AssetBundleManager.LoadBundleCallback), L, pos);
-	}
-
-	void Push_Framework_AssetBundleManager_LoadBundleCallback(IntPtr L, Framework.AssetBundleManager.LoadBundleCallback o)
-	{
-		ToLua.Push(L, o);
-	}
-
-	class Framework_BytesManager_LoadDataCallback_Event : LuaDelegate
-	{
-		public Framework_BytesManager_LoadDataCallback_Event(LuaFunction func) : base(func) { }
-		public Framework_BytesManager_LoadDataCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(int param0, byte[] param1)
-		{
-			func.BeginPCall();
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(int param0, byte[] param1)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public Framework.BytesManager.LoadDataCallback Framework_BytesManager_LoadDataCallback(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			Framework.BytesManager.LoadDataCallback fn = delegate(int param0, byte[] param1) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			Framework_BytesManager_LoadDataCallback_Event target = new Framework_BytesManager_LoadDataCallback_Event(func);
-			Framework.BytesManager.LoadDataCallback d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			Framework_BytesManager_LoadDataCallback_Event target = new Framework_BytesManager_LoadDataCallback_Event(func, self);
-			Framework.BytesManager.LoadDataCallback d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	bool Check_Framework_BytesManager_LoadDataCallback(IntPtr L, int pos)
-	{
-		return TypeChecker.CheckDelegateType(typeof(Framework.BytesManager.LoadDataCallback), L, pos);
-	}
-
-	void Push_Framework_BytesManager_LoadDataCallback(IntPtr L, Framework.BytesManager.LoadDataCallback o)
-	{
-		ToLua.Push(L, o);
-	}
-
-	class Framework_AssetObjectManager_LoadObjectCallback_Event : LuaDelegate
-	{
-		public Framework_AssetObjectManager_LoadObjectCallback_Event(LuaFunction func) : base(func) { }
-		public Framework_AssetObjectManager_LoadObjectCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(int param0, UnityEngine.Object param1)
-		{
-			func.BeginPCall();
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(int param0, UnityEngine.Object param1)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public Framework.AssetObjectManager.LoadObjectCallback Framework_AssetObjectManager_LoadObjectCallback(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			Framework.AssetObjectManager.LoadObjectCallback fn = delegate(int param0, UnityEngine.Object param1) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			Framework_AssetObjectManager_LoadObjectCallback_Event target = new Framework_AssetObjectManager_LoadObjectCallback_Event(func);
-			Framework.AssetObjectManager.LoadObjectCallback d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			Framework_AssetObjectManager_LoadObjectCallback_Event target = new Framework_AssetObjectManager_LoadObjectCallback_Event(func, self);
-			Framework.AssetObjectManager.LoadObjectCallback d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	bool Check_Framework_AssetObjectManager_LoadObjectCallback(IntPtr L, int pos)
-	{
-		return TypeChecker.CheckDelegateType(typeof(Framework.AssetObjectManager.LoadObjectCallback), L, pos);
-	}
-
-	void Push_Framework_AssetObjectManager_LoadObjectCallback(IntPtr L, Framework.AssetObjectManager.LoadObjectCallback o)
-	{
-		ToLua.Push(L, o);
-	}
-
-	class Framework_SceneManager_LoadSceneCallback_Event : LuaDelegate
-	{
-		public Framework_SceneManager_LoadSceneCallback_Event(LuaFunction func) : base(func) { }
-		public Framework_SceneManager_LoadSceneCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(int param0, string param1)
-		{
-			func.BeginPCall();
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(int param0, string param1)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.Push(param0);
-			func.Push(param1);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public Framework.SceneManager.LoadSceneCallback Framework_SceneManager_LoadSceneCallback(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			Framework.SceneManager.LoadSceneCallback fn = delegate(int param0, string param1) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			Framework_SceneManager_LoadSceneCallback_Event target = new Framework_SceneManager_LoadSceneCallback_Event(func);
-			Framework.SceneManager.LoadSceneCallback d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			Framework_SceneManager_LoadSceneCallback_Event target = new Framework_SceneManager_LoadSceneCallback_Event(func, self);
-			Framework.SceneManager.LoadSceneCallback d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	bool Check_Framework_SceneManager_LoadSceneCallback(IntPtr L, int pos)
-	{
-		return TypeChecker.CheckDelegateType(typeof(Framework.SceneManager.LoadSceneCallback), L, pos);
-	}
-
-	void Push_Framework_SceneManager_LoadSceneCallback(IntPtr L, Framework.SceneManager.LoadSceneCallback o)
 	{
 		ToLua.Push(L, o);
 	}

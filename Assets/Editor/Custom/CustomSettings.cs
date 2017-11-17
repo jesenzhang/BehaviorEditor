@@ -119,6 +119,7 @@ public static class CustomSettings
        
 
         _GT(typeof(MeshRenderer)),
+		_GT(typeof(MeshFilter)),
 #if !UNITY_5_4_OR_NEWER
         _GT(typeof(ParticleEmitter)),
         _GT(typeof(ParticleRenderer)),
@@ -162,10 +163,8 @@ public static class CustomSettings
 		_GT(typeof(BehaviorSystem.BehaviorDecorator)), 
 		_GT(typeof(BehaviorSystem.ScriptAction)),*/
 
-		_GT(typeof(Framework.AssetBundleManager)), 
-		_GT(typeof(Framework.BytesManager)), 
-		_GT(typeof(Framework.AssetObjectManager)), 
-		_GT(typeof(Framework.SceneManager)), 
+
+		_GT(typeof(Framework.GameScriptManager)), 
 
 		_GT(typeof(DebugSystem.GameDebugger)), 
 		_GT(typeof(DebugSystem.GameDebugWatcherComponent)), 

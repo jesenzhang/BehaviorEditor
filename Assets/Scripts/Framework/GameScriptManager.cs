@@ -13,13 +13,22 @@ namespace Framework{
 			if (LuaClient.Instance == null) {
 				gameObject.AddComponent<LuaClient> ();
 			}
-			_luaState = LuaClient.GetMainState (); 
-			GameObject.DontDestroyOnLoad (gameObject);
+			_luaState = LuaClient.GetMainState ();
+			GameObject.DontDestroyOnLoad (gameObject); 
+
+			_luaState.Call ("RunGame",false);
 		}
 
 		protected override void OnDestroy(){
 			_luaState = null;
 			base.OnDestroy ();
+		}
+
+		public void Init(){
+			#if UNITY_EDITOR 
+			AddSearchPath (LuaConst.luaDir+"/Proto");
+			#endif
+			AddSearchPath(LuaConst.luaResDir+"/Proto");
 		}
 
 		public void AddSearchPath(string path){

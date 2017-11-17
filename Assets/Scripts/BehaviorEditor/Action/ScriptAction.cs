@@ -12,7 +12,7 @@ namespace BehaviorSystem{
 
 	public class ScriptAction : BehaviorAction {
 
-		private static string LUA_ACTION_DIR = "BehaviorSystem/Actions/";
+		private static string LUA_ACTION_DIR = "BehaviorActions/";
 
 		public string scriptName ;   
 
@@ -29,7 +29,7 @@ namespace BehaviorSystem{
 				var luaClass = GameScriptManager.instance.Require (LUA_ACTION_DIR+scriptName);
 				if (luaClass != null) {
 					self = luaClass.Invoke<Behavior,LuaTable> ("new",Owner); 
-					CallVoidFunc("OnAwake");
+					CallVoidFunc("OnAwake"); 
 				}
 			}
 		}
@@ -63,6 +63,7 @@ namespace BehaviorSystem{
 			try{
 				return (TaskStatus)self.Invoke<LuaTable, int>(name,self);
 			}catch(Exception e){
+				Debug.LogErrorFormat ("CallFunc {0}",name);
 				Debug.LogException (e);
 			}
 			return TaskStatus.Failure;

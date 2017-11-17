@@ -14,7 +14,6 @@
 --  COMPANY:  NetEase
 --  CREATED:  2010年07月29日 14时30分02秒 CST
 --------------------------------------------------------------------------------
---
 
 local setmetatable = setmetatable
 local rawset = rawset
@@ -27,6 +26,9 @@ local table = table
 local string = string
 local tostring = tostring
 local type = type
+--add by zxp
+local assert = assert;
+
 
 local pb = require "pb"
 local wire_format = require "protobuf.wire_format"
@@ -38,6 +40,7 @@ local containers = require "protobuf.containers"
 local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
 local text_format = require "protobuf.text_format"
+
 
 module("protobuf.protobuf")
 
@@ -285,7 +288,9 @@ local function _DefaultValueConstructorForField(field)
     if field.cpp_type == FieldDescriptor.CPPTYPE_MESSAGE then
         local message_type = field.message_type
         return function (message)
-            result = message_type._concrete_class()
+			--modify
+            --result = message_type._concrete_class()
+			result = (message_type._concrete_class and message_type._concrete_class()) or message_type();
             result._SetListener(message._listener_for_children)
             return result
         end
@@ -363,7 +368,9 @@ local function _AddPropertiesForNonRepeatedCompositeField(field, message_meta)
     message_meta._getter[property_name] = function(self)
         local field_value = self._fields[field]
         if field_value == nil then
-            field_value = message_type._concrete_class()
+			--modify
+            --field_value = message_type._concrete_class()
+			field_value = (message_type._concrete_class and message_type._concrete_class()) or message_type();
             field_value:_SetListener(self._listener_for_children)            
             self._fields[field] = field_value
 
@@ -787,20 +794,20 @@ local function _AddIsInitializedMethod(message_descriptor, message_meta)
 
         for _,field in ipairs(required_fields) do
             if not message_meta._member.HasField(self, field.name) then
-                errors[#errors + 1] = field.name
+                errors.append(field.name) 
             end
         end
 
         for field, value in message_meta._member.ListFields(self) do
             if field.cpp_type == FieldDescriptor.CPPTYPE_MESSAGE then
                 if field.is_extension then
-                    name = string.format("(%s)", field.full_name)
+                    name = io:format("(%s)", field.full_name)
                 else
                     name = field.name
                 end
                 if field.label == FieldDescriptor.LABEL_REPEATED then
                     for i, element in ipairs(value) do
-                        prefix = string.format("%s[%d].", name, i)
+                        prefix = io:format("%s[%d].", name, i)
                         sub_errors = element:FindInitializationErrors()
                         for _, e in ipairs(sub_errors) do
                             errors[#errors + 1] = prefix .. e
@@ -957,4 +964,3 @@ local function Message(descriptor)
 end
 
 _M.Message = Message
-

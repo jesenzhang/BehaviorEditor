@@ -23,6 +23,7 @@ namespace Framework{
 			if (_instance == this) {
 				_instance = null;
 			}
+			 
 		}
 	}
 }
