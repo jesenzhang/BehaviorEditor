@@ -9,22 +9,19 @@ namespace BehaviorSystem{
 	[TaskName("Load Behavior")] 
 	public class ExternalBehaviorAction : BehaviorAction {  
 
-		[ExternalBehaviorAttribute()] 
-		public ExternalBehavior externalBehavior;
-
-		private Behavior runningBehavior;
+		public string behaviorName;
 
 		public override TaskStatus OnUpdate ()
 		{  
-			if (runningBehavior == null) {
+			if (string.IsNullOrEmpty(behaviorName)) {
 				return TaskStatus.Failure;
 			}
-			return runningBehavior.ExecutionStatus; 
+			return TaskStatus.Success;
 		}
 
 		protected override void SerializeArgments(List<Example.BehaviorValue> args){
 			var arg = new Example.BehaviorValue ();
-			arg.StrValue = externalBehavior.name;
+			arg.StrValue = behaviorName;
 			args.Add (arg);
 		}
 		 

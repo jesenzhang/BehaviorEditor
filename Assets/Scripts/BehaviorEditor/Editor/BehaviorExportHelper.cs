@@ -8,7 +8,11 @@ using System.IO;
 public class BehaviorExportHelper {
 
 	public static void ExportBehaviorTree(BehaviorTree tree){
-		ExportBehaviorTree (tree, "Export/Data/BehaviorTree_" + tree.BehaviorName + ".bytes");
+		var exportDir = "Export/BehaviorTree";
+		if (!Directory.Exists (exportDir)) {
+			Directory.CreateDirectory (exportDir);
+		}
+		ExportBehaviorTree (tree, exportDir + "/BehaviorTree_" + tree.BehaviorName + ".bytes");
 	}	 
 
 	public static void ExportBehaviorTree(BehaviorTree tree,string path){
@@ -22,10 +26,16 @@ public class BehaviorExportHelper {
 		var actions = new List<Example.BehaviorAction> ();
 		var conditionals = new List<Example.BehaviorConditional> ();
 
-		foreach (var variable in tree.GetAllVariables()) {			
-			var v = ExportSharedVariable (variable);
-			variables.Add (v);
+		Debug.LogFormat ("export {0} to {1}", tree, path);
+
+		var treeVars = tree.GetAllVariables();
+		if(treeVars!=null){
+			foreach (var variable in treeVars) {			
+				var v = ExportSharedVariable (variable);
+				variables.Add (v);
+			}
 		}
+
 
 		var root = tree.GetBehaviorSource().RootTask;
 		List<Task> tasks = new List<Task> ();

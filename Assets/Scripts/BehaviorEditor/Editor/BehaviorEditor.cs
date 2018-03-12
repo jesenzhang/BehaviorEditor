@@ -11,8 +11,11 @@ public class BehaviorEditor  {
 	[MenuItem("Tools/Export Behavior Tree")]
 	static void ExportBehaviorTree(){
 		var trees = Selection.GetFiltered<BehaviorTree> (SelectionMode.TopLevel);
-		foreach (var tree in trees) {			
-			BehaviorExportHelper.ExportBehaviorTree (tree);
+		foreach (var tree in trees) {	
+			if (tree != null) {
+				BehaviorExportHelper.ExportBehaviorTree (tree);
+			}
+
 		}
 	}
 
